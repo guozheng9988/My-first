@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<style type="text/css">
+	div{
+		font-size: 16px;
+		color: red;
+		margin-top:30px;
+	}
+	.div1{
+		border:1px solid #ccc;
+	}
+	.div2{
+		border:1px solid red;
+		margin-top:30px;
+		height: 150px;
+		line-height: 50px;
+	}
+	.one{width: 50px;}
+</style>
+<script type="text/javascript">
+function Case(){
+var y=document.getElementById("time_start").value;
+var x=document.getElementById("time_end").value;
+var syear=document.getElementById("syear").value;
+var smonth=document.getElementById("smonth").value;
+var sdate=document.getElementById("sdate").value;
+var shour=document.getElementById("shour").value;
+var sminute=document.getElementById("sminute").value;
+var ssecond=document.getElementById("ssecond").value;
+var eyear=document.getElementById("eyear").value;
+var emonth=document.getElementById("emonth").value;
+var edate=document.getElementById("edate").value;
+var eshour=document.getElementById("ehour").value;
+var eminute=document.getElementById("eminute").value;
+var esecond=document.getElementById("esecond").value;
+
+var time_start=(new Date(y)).getTime();
+var time_end=(new Date(x)).getTime();
+var xc=time_end-time_start;
+  if(time_end!=""&&time_start!=''&&time_end-time_start>0){
+	var time_distance=xc;
+	 setTimeout(show_time(),1000);
+	 function show_time(){
+			var timer = document.getElementById("timer");
+			if(!timer){return;}
+			var int_day,int_hour,int_minute,int_second;
+			if(time_distance>0){
+			int_day=Math.floor(time_distance/86400000)
+			time_distance-=int_day*86400000;
+			int_hour=Math.floor(time_distance/3600000)
+			time_distance-=int_hour*3600000;
+			int_minute=Math.floor(time_distance/60000)
+			time_distance-=int_minute*60000;
+			int_second=Math.floor(time_distance/1000)
+			if(int_hour<10)
+			int_hour="0"+int_hour;
+			if(int_minute<10)
+			int_minute="0"+int_minute;
+			if(int_second<10)
+			int_second="0"+int_second;
+			var str_time=int_day+"天"+int_hour+"小时"+int_minute+"分钟"+int_second+"秒";
+			timer.innerHTML=str_time; 
+			setTimeout(show_time(),1000);
+			}
+           
+    
+    }
+  }
+ if(time_end!=""&&time_start!=''&&time_start>time_end){alert("结束时间不能早于开始时间")}
+}  
+
+</script>
+</head>
+
+<body>
+<div class="div1">
+选择开始时间：
+<input type="date" id="time_start" onchange="Case()" />
+选择结束时间：
+<input type="date" id="time_end" onchange="Case()" />
+<div>倒计时：<span id="timer"></span></div> 
+</div>
+
+<div class="div2">
+	输入或选择开始时间:
+	<input type="number" class="one" min="2016" id="year">年<input type="number" class="one" max="12" min="1" id="month ">月<input type="number" class="one" max="31" min="1" id="date">日<input type="number" class="one" max="24" min="1" id="hour">时<input type="number" class="one" max="60" min="1" id="minute">分<input type="number" class="one" max="60" min="1" id="second">秒<br />
+	输入或选择结束时间:
+	<input type="number" class="one" min="2016" id="eyear">年<input type="number" class="one" max="12" min="1" id="emonth ">月<input type="number" class="one" max="31" min="1" id="edate">日<input type="number" class="one" max="24" min="1" id="ehour">时<input type="number" class="one" max="60" min="1" id="eminute">分<input type="number" class="one" max="60" min="1" id="esecond">秒<br />
+	倒计时：<span id="timer"></span>
+
+</div>
+<!-- 选择开始时间：
+<input type="datetime" id="time_start" onchange="Case()" />
+选择结束时间：
+<input type="datetime" id="time_end" onchange="Case()" />
+<div>倒计时：<span id="timer"></span></div>  -->
+
+</body>
+</html>
